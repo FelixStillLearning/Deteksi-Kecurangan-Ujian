@@ -8,6 +8,7 @@ Thumbs.db
 
 # Dataset & outputs
 /data/
+/Cheating Scenario Dataset in Online Exam/
 /checkpoints/
 /results/
 /dataset.zip

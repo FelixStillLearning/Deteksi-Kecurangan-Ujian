@@ -12,6 +12,9 @@ IMG_SIZE = 640
 BATCH_SIZE = 16
 EPOCHS = 50
 CONFIDENCE_THRESHOLD = 0.5
+# Device selection
+# "auto" will pick GPU if available else CPU. Use "0" to force first GPU, "cpu" to force CPU.
+DEVICE = "auto"
 
 # 13 Classes - 4 Categories
 CLASS_NAMES = [

@@ -3,6 +3,7 @@ Training YOLOv8 untuk Deteksi Kecurangan Ujian
 """
 import os
 from ultralytics import YOLO
+import torch
 from config import *
 
 def train():
@@ -26,6 +27,11 @@ def train():
     print("TRAINING YOLOV8 - Cheating Detection")
     print("=" * 50)
     
+    # Resolve device: auto -> GPU if available, else CPU
+    resolved_device = DEVICE
+    if DEVICE == "auto":
+        resolved_device = "0" if torch.cuda.is_available() else "cpu"
+
     # Training
     results = model.train(
         data=data_yaml,
@@ -42,6 +48,7 @@ def train():
         lr0=0.001,
         lrf=0.01,
         augment=True,
+        device=resolved_device,
         hsv_h=0.015,
         hsv_s=0.7,
         hsv_v=0.4,

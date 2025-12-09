@@ -8,7 +8,21 @@ from config import *
 
 def load_model(model_path=None):
     if model_path is None:
-        model_path = os.path.join(CHECKPOINT_DIR, 'cheating_detector', 'weights', 'best.pt')
+        # Cek hasil_colab dulu, baru checkpoint
+        colab_model = os.path.join(BASE_DIR, 'hasil_colab', 'best.pt')
+        checkpoint_model = os.path.join(CHECKPOINT_DIR, 'cheating_detector', 'weights', 'best.pt')
+        
+        if os.path.exists(colab_model):
+            model_path = colab_model
+            print(f"✅ Loading model dari Colab: {colab_model}")
+        elif os.path.exists(checkpoint_model):
+            model_path = checkpoint_model
+            print(f"✅ Loading model dari checkpoint: {checkpoint_model}")
+        else:
+            print(f"❌ Model tidak ditemukan di:")
+            print(f"   - {colab_model}")
+            print(f"   - {checkpoint_model}")
+            return None
     
     if not os.path.exists(model_path):
         print(f"Model tidak ditemukan: {model_path}")
